@@ -3,9 +3,8 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.datasets import make_classification
 from sklearn.model_selection import cross_val_score
 
-def testTrain(X = [], y = []):
-    fold = 30
-    clf = RandomForestClassifier(n_estimators=300)
+def testTrain(X = [], y = [], fold = 10, trees = 100):
+    clf = RandomForestClassifier(n_estimators=trees)
     # clf = BaggingClassifier(n_estimators=100)
     score = cross_val_score(clf, X, y, cv=fold)
     print(score)
