@@ -26,6 +26,6 @@ def main():
     print(len(X), len(y))
 
     router = Router.Router(method)
-    router.randomForest(X, y, fold, trees)
+    router.randomForest(X, y, int(fold), int(trees))
 
 main()
