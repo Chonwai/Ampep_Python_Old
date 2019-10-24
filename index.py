@@ -8,8 +8,6 @@ from service import Utility as Utility
 
 feature = sys.argv[1]
 method = sys.argv[2]
-fold = sys.argv[3]
-trees = sys.argv[4]
 
 def main():
     GetFeature.getFeature('./data/trian_po_set3298_for_ampep_sever.fasta',
@@ -26,6 +24,6 @@ def main():
     print(len(X), len(y))
 
     router = Router.Router(method)
-    router.randomForest(X, y, int(fold), int(trees))
+    router.randomForest(X, y, int(sys.argv[3]), int(sys.argv[4]))
 
 main()
