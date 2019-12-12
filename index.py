@@ -7,7 +7,10 @@ from service import Router as Router
 from service import Utility as Utility
 
 feature = sys.argv[1]
+ml = sys.argv[2]
 method = sys.argv[3]
+fold = int(sys.argv[4])
+trees = int(sys.argv[5])
 
 def main():
     GetFeature.getFeature('./data/trian_po_set3298_for_ampep_sever.fasta',
@@ -24,6 +27,6 @@ def main():
     print(len(X), len(y))
 
     trainer = RFTrainer.Trainer(X, y)
-    trainer.training(10, 100, method)
+    trainer.training(fold, trees, method)
 
 main()

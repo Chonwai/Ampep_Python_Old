@@ -19,7 +19,7 @@ class Trainer():
             clf = RandomForestClassifier(n_estimators=(trees + 100 * i))
             cv = self.router(method, fold)
             score = cross_validate(clf, self.X, self.y, cv=cv)
-            print("Finished Training Model " + str(i) + " Times with " + str(trees + 100 * i) + " Trees!")
+            print("Finished Training Model " + str(i) + " Times with " + str(fold) + " Fold and " + str(trees + 100 * i) + " Trees!")
             print(score)
 
             model = './model/RepeatedStratifiedKFold/RF_' + method + '_0' + str(i) + '.pkl'
