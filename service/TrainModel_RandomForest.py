@@ -22,7 +22,7 @@ class Trainer():
             print("Finished Training Model " + str(i) + " Times with " + str(fold) + " Fold and " + str(trees + 100 * i) + " Trees!")
             print(score)
 
-            model = './model/RepeatedStratifiedKFold/RF_' + method + '_0' + str(i) + '.pkl'
+            model = './model/RepeatedStratifiedKFold/RF_' + method + '_' + str(fold) + '_' + str(trees + 100 * i) + '.pkl'
             with open(model, 'wb') as file:
                 pickle.dump(score, file)
 
