@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import sys
+import timeit
 from service import GetFeature as GetFeature
 from service import TrainModel_RandomForest as RFTrainer
 from service import Router as Router
@@ -29,4 +30,7 @@ def main():
     trainer = RFTrainer.Trainer(X, y)
     trainer.training(fold, trees, method)
 
+start = timeit.default_timer()
 main()
+stop = timeit.default_timer()
+print('Time: ', stop - start)
