@@ -17,10 +17,12 @@ class Trainer():
 
     def training(self, fold=10, trees=100, method="KFold"):
         for i in range(5):
-            clf = RandomForestClassifier(n_estimators=(trees + 100 * i))
+            clf = RandomForestClassifier(n_estimators=(trees + 100 * i), n_jobs=-1)
             cv = self.router(method, fold)
+
+            clf.fit(self.X, self.y)
             
-            score = cross_validate(clf.fit(self.X, self.y), self.X, self.y, cv=cv, n_jobs=-1, scoring=('accuracy', 'average_precision'))
+            score = cross_validate(clf, self.X, self.y, cv=cv, n_jobs=6, scoring=('accuracy', 'average_precision'))
             # score = cross_val_predict(clf, self.X, self.y, cv=cv, n_jobs=-1, scoring=('accuracy', 'average_precision'))
             print("Finished Training Model " + str(i) + " Times with " + str(fold) + " Fold and " + str(trees + 100 * i) + " Trees!")
 
@@ -42,7 +44,7 @@ class Trainer():
             print("Mean Accuracy: " + str(meanAcc))
             print("Top Accuracy: " + str(max(score[name]) * 100))
             print("Bottom Accuracy: " + str(min(score[name]) * 100))
-            print('\n')
+            print("\n")
 
     def router(self, method="KFold", fold=10):
         if (method == "KFold"):

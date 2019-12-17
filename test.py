@@ -11,6 +11,10 @@ def main():
                           './data/testPos.tsv', feature)
     GetFeature.getFeature('./data/testNav.fasta',
                           './data/testNav.tsv', feature)
+    # GetFeature.getFeature('./data/trian_po_set3298_for_ampep_sever.fasta',
+    #                       './data/trian_po_set3298_for_ampep_sever.tsv', feature)
+    # GetFeature.getFeature('./data/trian_ne_set9894_for_ampep_sever.fasta',
+    #                       './data/trian_ne_set9894_for_ampep_sever.tsv', feature)
     utils = Utils.Utils('Test')
 
     posArray, posY = utils.readFeature(
