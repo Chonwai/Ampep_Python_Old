@@ -16,7 +16,7 @@ class Trainer():
         self.y = y
 
     def training(self, fold=10, trees=100, method="KFold"):
-        for i in range(1):
+        for i in range(5):
             clf = RandomForestClassifier(n_estimators=(trees + 100 * i))
             cv = self.router(method, fold)
             
