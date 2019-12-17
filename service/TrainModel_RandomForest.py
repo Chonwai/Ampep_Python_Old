@@ -2,7 +2,7 @@ from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.datasets import make_classification
 from sklearn.model_selection import permutation_test_score
-from sklearn.model_selection import cross_val_score, cross_validate
+from sklearn.model_selection import cross_val_score, cross_validate, cross_val_predict
 from sklearn.model_selection import KFold
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import StratifiedShuffleSplit
@@ -16,15 +16,18 @@ class Trainer():
         self.y = y
 
     def training(self, fold=10, trees=100, method="KFold"):
-        for i in range(5):
+        for i in range(1):
             clf = RandomForestClassifier(n_estimators=(trees + 100 * i))
             cv = self.router(method, fold)
-            score = cross_validate(clf, self.X, self.y, cv=cv, n_jobs=-1, scoring=('accuracy', 'average_precision'))
+            
+            score = cross_validate(clf.fit(self.X, self.y), self.X, self.y, cv=cv, n_jobs=-1, scoring=('accuracy', 'average_precision'))
+            # score = cross_val_predict(clf, self.X, self.y, cv=cv, n_jobs=-1, scoring=('accuracy', 'average_precision'))
             print("Finished Training Model " + str(i) + " Times with " + str(fold) + " Fold and " + str(trees + 100 * i) + " Trees!")
 
             model = './model/' + method + '/RF_' + method + '_' + str(fold) + '_' + str(trees + 100 * i) + '.pkl'
+
             with open(model, 'wb') as file:
-                pickle.dump(score, file)
+                pickle.dump(clf, file)
 
             self.calculateScore(score, fold, scoring=['accuracy', 'average_precision'])
 
