@@ -16,22 +16,20 @@ class Trainer():
         self.y = y
 
     def training(self, fold=10, trees=100, method="KFold"):
-        for i in range(5):
-            clf = RandomForestClassifier(n_estimators=(trees + 100 * i), n_jobs=-1)
-            cv = self.router(method, fold)
+        for h in range(5):    
+            for i in range(5):
+                clf = RandomForestClassifier(n_estimators=(trees + 100 * i), n_jobs=-1)
+                clf.fit(self.X, self.y)
+                cv = self.router(method, fold + 1 * h)
 
-            clf.fit(self.X, self.y)
-            
-            score = cross_validate(clf, self.X, self.y, cv=cv, n_jobs=6, scoring=('accuracy', 'average_precision'))
-            # score = cross_val_predict(clf, self.X, self.y, cv=cv, n_jobs=-1, scoring=('accuracy', 'average_precision'))
-            print("Finished Training Model " + str(i) + " Times with " + str(fold) + " Fold and " + str(trees + 100 * i) + " Trees!")
+                score = cross_validate(clf, self.X, self.y, cv=cv, n_jobs=-1, scoring=('accuracy', 'f1'))
+                print("Finished Training Model " + str(i) + " Times with " + str(fold + 1 * h) + " Fold and " + str(trees + 100 * i) + " Trees!")
+                model = './model/' + method + '/RF_' + method + '_' + str(fold + 1 * h) + '_' + str(trees + 100 * i) + '.pkl'
 
-            model = './model/' + method + '/RF_' + method + '_' + str(fold) + '_' + str(trees + 100 * i) + '.pkl'
+                with open(model, 'wb') as file:
+                    pickle.dump(clf, file)
 
-            with open(model, 'wb') as file:
-                pickle.dump(clf, file)
-
-            self.calculateScore(score, fold, scoring=['accuracy', 'average_precision'])
+                self.calculateScore(score, fold + 1 * h, scoring=['accuracy', 'f1'])
 
     def calculateScore(self, score, fold, scoring):
         for i in scoring:
