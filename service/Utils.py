@@ -1,5 +1,4 @@
 import numpy as np
-from Bio import SeqIO
 import pickle
 
 class Utils():
