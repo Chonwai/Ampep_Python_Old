@@ -22,6 +22,7 @@ class Utils():
     def predict(self, path, X):
         with open(path, 'rb') as f:
             clf = pickle.load(f)
+            # result = clf.predict(X)
             result = clf.predict(X)
             return result
                 

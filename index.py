@@ -3,7 +3,7 @@ import numpy as np
 import sys
 import timeit
 from service import GetFeature as GetFeature
-from service import TrainModel_RandomForest as RFTrainer
+from service import TrainingMethod as RFTrainer
 from service import Router as Router
 from service import Utils as Utils
 
