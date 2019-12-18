@@ -4,7 +4,6 @@ import sys
 import timeit
 from service import GetFeature as GetFeature
 from service import TrainingMethod as RFTrainer
-from service import Router as Router
 from service import Utils as Utils
 
 feature = sys.argv[1]
@@ -14,10 +13,10 @@ fold = int(sys.argv[4])
 trees = int(sys.argv[5])
 
 def main():
-    GetFeature.getFeature('./data/trian_po_set3298_for_ampep_sever.fasta',
-                          './data/trian_po_set3298_for_ampep_sever.tsv', feature)
-    GetFeature.getFeature('./data/trian_ne_set9894_for_ampep_sever.fasta',
-                          './data/trian_ne_set9894_for_ampep_sever.tsv', feature)
+    # GetFeature.getFeature('./data/trian_po_set3298_for_ampep_sever.fasta',
+    #                       './data/trian_po_set3298_for_ampep_sever.tsv', feature)
+    # GetFeature.getFeature('./data/trian_ne_set9894_for_ampep_sever.fasta',
+    #                       './data/trian_ne_set9894_for_ampep_sever.tsv', feature)
     utils = Utils.Utils('Train')
     posArray, posY = utils.readFeature(
         "data/trian_po_set3298_for_ampep_sever.tsv", 1)
